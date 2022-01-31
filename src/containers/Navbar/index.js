@@ -1,31 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../components/Button";
-import SearchField from "../../components/SearchField";
+import { BiSearchAlt } from "react-icons/bi";
 
-import { Board } from "./styles";
+import {
+  Nav,
+  Logo,
+  Hamburger,
+  Menu,
+  MenuLink,
+  SearchField,
+  Search,
+} from "./styles";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Board>
-      <SearchField />
-      <>
-        <Button
-          text="Login"
-          btnWidth="160px"
-          btnHeight="60px"
-          btnColor="--color-snow"
-          txtColor="--color-dark-purple"
-          txtSize="25px"
+    <Nav>
+      <Logo>
+        <a>Logo</a>
+      </Logo>
+      <SearchField>
+        <Search placeholder="Search for some product..."></Search>
+        <BiSearchAlt
+          style={{
+            borderRadius: "0 14px 14px 0",
+            border: "1px solid var(--color-lapis-lazuli)",
+            padding: "0.3rem",
+            backgroundColor: "var(--color-lapis-lazuli)",
+            color: "var(--color-white)",
+          }}
         />
-        <Button
-          text="Sign up"
-          btnWidth="160px"
-          btnHeight="60px"
-          btnColor="--color-dark-purple"
-          txtColor="--color-snow"
-          txtSize="25px"
-        />
-      </>
-    </Board>
+      </SearchField>
+      <Hamburger onClick={() => setIsOpen(!isOpen)}>
+        <span />
+        <span />
+        <span />
+      </Hamburger>
+      <Menu isOpen={isOpen}>
+        {/* <MenuLink href="#"></MenuLink> */}
+        <MenuLink href="#">About</MenuLink>
+        <MenuLink href="#">Login</MenuLink>
+        <MenuLink href="#">Sign up</MenuLink>
+      </Menu>
+    </Nav>
   );
 }
