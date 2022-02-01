@@ -1,12 +1,13 @@
 import React from "react";
 
 import "./App.css";
-import Navbar from "./containers/Navbar";
+import Home from "./pages/Home";
+import Routes_ from "./routes";
 
 export default function App() {
   return (
     <>
-      <Navbar />
+      <Routes_/>
     </>
   );
 }

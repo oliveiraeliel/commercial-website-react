@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Nav = styled.nav`
+  position: relative;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;

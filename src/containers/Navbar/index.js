@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <Nav>
       <Logo>
-        <a>Logo</a>
+        <a>Ji.shirts</a>
       </Logo>
       <SearchField>
         <Search placeholder="Search for some product..."></Search>
