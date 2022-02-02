@@ -44,7 +44,10 @@ export default function Home() {
           <SideImage src="https://www.footyrenders.com/render/profile-10-neymar.png"></SideImage>
         </Container>
       </Section>
-      <Section style={{ backgroundColor: "var(--color-dark-purple)" }}>
+      <Section
+        style={{ backgroundColor: "var(--color-dark-purple)" }}
+        id="on-sale"
+      >
         <h1>On Sale</h1>
 
         <Carousel itemsToShow={1} breakPoints={breakPoints}>
@@ -95,7 +98,7 @@ export default function Home() {
           </Item>
         </Carousel>
       </Section>
-      <CatalogBody>
+      <CatalogBody id="catalog">
         <h1>Catalog</h1>
         <Catalog>
           <CatalogItem>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   position: relative;
-  padding: 0 2rem;
+  padding: 0 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,7 +29,7 @@ export const Hamburger = styled.div`
     border-radius: 5px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1209px) {
     display: flex;
   }
 `;
@@ -40,7 +40,7 @@ export const Menu = styled.div`
   align-items: center;
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1209px) {
     overflow: hidden;
     flex-direction: column;
     width: 100%;

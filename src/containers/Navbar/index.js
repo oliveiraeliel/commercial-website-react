@@ -39,9 +39,27 @@ export default function Navbar() {
       </Hamburger>
       <Menu isOpen={isOpen}>
         {/* <MenuLink href="#"></MenuLink> */}
-        <MenuLink href="#">About</MenuLink>
-        <MenuLink href="#">Login</MenuLink>
-        <MenuLink href="#">Sign up</MenuLink>
+        <MenuLink href="#on-sale">On sale</MenuLink>
+        <MenuLink href="#catalog">Catalog</MenuLink>
+        <MenuLink href="#">
+          <Button
+            text="Login"
+            btnColor="--color-turquoise-blue"
+            txtColor="--color-dark-purple"
+            btnWidth="100px"
+            btnHeight="25px"
+            
+          />
+        </MenuLink>
+        <MenuLink href="#">
+          <Button
+            text="Sign up"
+            btnColor="--color-dark-purple"
+            txtColor="--color-white"
+            btnWidth="100px"
+            btnHeight="25px"
+          />
+        </MenuLink>
       </Menu>
     </Nav>
   );
