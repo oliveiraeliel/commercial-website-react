@@ -8,7 +8,7 @@ export default function Box(props) {
     <BoxBody href="/home" >
       <ProductImg src={props.url}></ProductImg>
       <Name>{props.name}</Name>
-      <Price onSale={props.onSale}>R$ {props.price}</Price>
+      <Price _onSale={props._onSale}>R$ {props.price}</Price>
       <NewPrice>
         {props.newPrice}
       </NewPrice>

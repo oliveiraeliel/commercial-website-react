@@ -20,7 +20,7 @@ export const Section = styled.section`
     text-align: center;
 
     @media (max-width: 768px) {
-      font-size: 3.3rem;
+      font-size: 4.5rem;
     }
   }
 `;
@@ -28,8 +28,8 @@ export const Section = styled.section`
 export const Item = styled.div`
   margin: 1rem;
   @media (max-width: 768px) {
-      margin: 0;
-    }
+    margin: 0;
+  }
 `;
 
 export const Container = styled.a`
@@ -69,5 +69,50 @@ export const SideImage = styled.img`
 
   @media (max-width: 1050px) {
     display: none;
+  }
+`;
+
+export const Catalog = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+  margin: 0 auto;
+
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1230px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+export const CatalogBody = styled.div`
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+
+  text-align: center;
+
+  h1 {
+    margin-bottom: 4rem;
+    font-size: 5rem;
+    font-weight: 300;
+  }
+`;
+
+export const CatalogItem = styled.div`
+  margin: 10px
+`;
+
+export const Footer = styled.footer`
+  display: grid;
+  place-content: center;
+  text-align: center;
+  align-items: center;
+  height: 15vh;
+  background-color: var(--color-turquoise-blue);
+
+  a {
+    color: var(--color-lapis-lazuli);
+    text-decoration: none;
   }
 `;

@@ -2,7 +2,9 @@ import React from "react";
 import Box from "../../components/Box";
 import Navbar from "../../containers/Navbar";
 import Carousel from "react-elastic-carousel";
-// import Item from 'react-elastic-carousel'
+import { api } from "../../Api";
+
+import { BsGithub } from "react-icons/bs";
 
 import {
   Welcome,
@@ -10,11 +12,21 @@ import {
   WelcomeText,
   SideImage,
   Section,
-  // Carousel,
   Item,
+  Catalog,
+  CatalogBody,
+  Footer,
+  CatalogItem,
 } from "./styles";
 
 export default function Home() {
+  api
+    .get("/product")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
+
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 840, itemsToShow: 2, itemsToScroll: 2, pagination: false },
@@ -41,7 +53,7 @@ export default function Home() {
               name="Black T-shirt"
               price="120"
               url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              onSale={true}
+              _onSale={true}
               newPrice="R$ 80"
             />
           </Item>
@@ -50,7 +62,7 @@ export default function Home() {
               name="Black T-shirt"
               price="120"
               url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              onSale={true}
+              _onSale={true}
               newPrice="R$ 80"
             />
           </Item>
@@ -59,7 +71,7 @@ export default function Home() {
               name="Black T-shirt"
               price="120"
               url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              onSale={true}
+              _onSale={true}
               newPrice="R$ 80"
             />
           </Item>
@@ -68,7 +80,7 @@ export default function Home() {
               name="Black T-shirt"
               price="120"
               url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              onSale={true}
+              _onSale={true}
               newPrice="R$ 80"
             />
           </Item>
@@ -77,12 +89,51 @@ export default function Home() {
               name="Black T-shirt"
               price="120"
               url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              onSale={true}
+              _onSale={true}
               newPrice="R$ 80"
             />
           </Item>
         </Carousel>
       </Section>
+      <CatalogBody>
+        <h1>Catalog</h1>
+        <Catalog>
+          <CatalogItem>
+            <Box
+              name="Black T-shirt"
+              price="120"
+              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
+            />
+          </CatalogItem>
+          <CatalogItem>
+            <Box
+              name="Black T-shirt"
+              price="120"
+              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
+            />
+          </CatalogItem>
+          <CatalogItem>
+            <Box
+              name="Black T-shirt"
+              price="120"
+              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
+            />
+          </CatalogItem>
+          <CatalogItem>
+            <Box
+              name="Black T-shirt"
+              price="120"
+              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
+            />
+          </CatalogItem>
+        </Catalog>
+      </CatalogBody>
+      <Footer>
+        Made with love by{" "}
+        <a href="https://github.com/oliveiraeliel">
+          oliveiraeliel <BsGithub />
+        </a>
+      </Footer>
     </>
   );
 }

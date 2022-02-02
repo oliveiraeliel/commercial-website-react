@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BoxBody = styled.a`
-  /* position: relative; */
+  position: relative;
   display: grid;
   grid-template-rows: repeat(3, 2fr);
   grid-auto-flow: row dense;
@@ -10,15 +10,18 @@ export const BoxBody = styled.a`
 
   height: 500px;
   /* border-radius: 14px; */
-  border: 1px solid black;
+  border: 2px solid var(--color-tyrian-purple);
   padding: 1rem 1rem 3rem;
   text-decoration: none;
   color: black;
   background-color: var(--color-snow);
   text-align: center;
-
-  &:hover{
+  margin: auto;
+  &:hover {
     background-color: var(--color-turquoise-blue);
+  }
+  @media (max-width: 768px) {
+    height: 470px;
   }
 `;
 
@@ -28,9 +31,9 @@ export const Name = styled.a`
 `;
 
 export const Price = styled.a`
-  font-size: ${(props) => (props.onSale ? "1.5rem" : "2.5rem")};
-  font-weight: ${(props) => (props.onSale ? "300" : "500")};
-  text-decoration: ${(props) => (props.onSale ? "line-through" : "none")};
+  font-size: ${(props) => (props._onSale ? "1.5rem" : "2.5rem")};
+  font-weight: ${(props) => (props._onSale ? "300" : "500")};
+  text-decoration: ${(props) => (props._onSale ? "line-through" : "none")};
 `;
 
 export const NewPrice = styled.a`
