@@ -29,7 +29,7 @@ export const Hamburger = styled.div`
     border-radius: 5px;
   }
 
-  @media (max-width: 1209px) {
+  @media (max-width: 1140px) {
     display: flex;
   }
 `;
@@ -40,7 +40,7 @@ export const Menu = styled.div`
   align-items: center;
   position: relative;
 
-  @media (max-width: 1209px) {
+  @media (max-width: 1140px) {
     overflow: hidden;
     flex-direction: column;
     width: 100%;

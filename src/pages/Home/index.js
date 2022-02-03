@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "../../components/Box";
 import Navbar from "../../containers/Navbar";
 import Carousel from "react-elastic-carousel";
@@ -20,12 +20,14 @@ import {
 } from "./styles";
 
 export default function Home() {
-  api
-    .get("/product")
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => console.log(err));
+  useEffect(() => {
+    api
+      .get("/product")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
