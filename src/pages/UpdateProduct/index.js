@@ -4,13 +4,11 @@ import { TextField } from "@mui/material";
 import Files from "react-files";
 import env from "react-dotenv";
 
-import { api } from "../../Api";
-
-import { Form, Input, Img, Section } from "./styles";
+import { Section, Form, Img, Input } from "../AddProduct/styles";
 import Button from "../../components/Button";
 
-export default function AddProduct() {
-  document.title = "Add product";
+export default function UpdateProduct() {
+  document.title = "Upload product";
   const [name, setName] = useState(null);
   const [price, setPrice] = useState(null);
   const [cost, setCost] = useState(null);
@@ -18,45 +16,9 @@ export default function AddProduct() {
   const [img, setImg] = useState(null);
   const [quantity, setQuantity] = useState(null);
 
-  function handleClick() {
-    const image = new FormData();
-    if (img !== null) {
-      image.append("file", img);
-      image.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET);
-    }
+  function handleClick(){
 
-    api
-      .post("/product", {
-        name: name,
-        price: price,
-        cost: cost,
-        brand: brand,
-        quantity: quantity,
-      })
-      .then((res) => {
-        const _id = res.data.product_id;
-
-        if (image !== null) {
-          axios
-            .post(
-              "https://api.cloudinary.com/v1_1/dd2cjxbui/image/upload",
-              image
-            )
-            .then((res) => {
-              api
-                .patch("/product/image", {
-                  image: res.data.secure_url,
-                  _id: _id,
-                })
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
-        }
-      })
-      .catch((err) => console.log(err));
   }
-
   return (
     <Section>
       <Form>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import { BiSearchAlt } from "react-icons/bi";
+import { AiFillSetting } from "react-icons/ai";
 
 import {
   Nav,
@@ -10,9 +11,10 @@ import {
   MenuLink,
   SearchField,
   Search,
+  Logout,
 } from "./styles";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -38,20 +40,48 @@ export default function Navbar() {
         <span />
       </Hamburger>
       <Menu isOpen={isOpen}>
-        {/* <MenuLink href="#"></MenuLink> */}
+        <MenuLink style={{ display: props.logged ? "block" : "none" }}>
+          {props.name}
+        </MenuLink>
         <MenuLink href="#on-sale">On sale</MenuLink>
         <MenuLink href="#catalog">Catalog</MenuLink>
-        <MenuLink href="/login">
+        <MenuLink
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = "/";
+          }}
+          style={{ display: props.logged ? "block" : "none" }}
+        >
+          Logout
+        </MenuLink>
+        <MenuLink
+          style={{
+            display:
+              JSON.parse(localStorage.getItem("user")).email ===
+              "admin.acount@admin.com"
+                ? "block"
+                : "none",
+          }}
+          href="/admin"
+        >
+          <AiFillSetting />
+        </MenuLink>
+        <MenuLink
+          href="/login"
+          style={{ display: !props.logged ? "block" : "none" }}
+        >
           <Button
             text="Login"
             btnColor="--color-turquoise-blue"
             txtColor="--color-dark-purple"
             btnWidth="100px"
             btnHeight="25px"
-            
           />
         </MenuLink>
-        <MenuLink href="/sign-up">
+        <MenuLink
+          href="/sign-up"
+          style={{ display: !props.logged ? "block" : "none" }}
+        >
           <Button
             text="Sign up"
             btnColor="--color-dark-purple"

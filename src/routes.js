@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import AddProduct from "./pages/AddProduct";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Admin from "./pages/Admin";
+import UpdateProduct from "./pages/UpdateProduct";
 
 export default function Routes_() {
   return (
@@ -15,7 +17,8 @@ export default function Routes_() {
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/update-product" element={<UpdateProduct />} />
       </Routes>
     </BrowserRouter>
   );

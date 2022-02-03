@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "../../components/Box";
 import Navbar from "../../containers/Navbar";
 import Carousel from "react-elastic-carousel";
 import { api } from "../../Api";
-
-import { BsGithub } from "react-icons/bs";
 
 import {
   Welcome,
@@ -15,11 +13,18 @@ import {
   Item,
   Catalog,
   CatalogBody,
-  Footer,
   CatalogItem,
 } from "./styles";
 
 export default function Home() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [logged, setLogged] = useState(false);
+
+  useEffect(() => {
+    if (user) setLogged(true);
+  }, []);
+
+  document.title = "Ji.shirts";
   useEffect(() => {
     api
       .get("/product")
@@ -34,11 +39,16 @@ export default function Home() {
     { width: 840, itemsToShow: 2, itemsToScroll: 2, pagination: false },
     { width: 1230, itemsToShow: 3 },
   ];
-
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <>
       <Section>
-        <Navbar />
+        <Navbar
+          logged={logged}
+          name={logged ? capitalizeFirstLetter(user.name) : ""}
+        />
         <Container>
           <WelcomeText>
             <Welcome>Ji.shirts</Welcome> <span>your sports shirt store </span>
@@ -133,12 +143,6 @@ export default function Home() {
           </CatalogItem>
         </Catalog>
       </CatalogBody>
-      <Footer>
-        Made with love by{" "}
-        <a href="https://github.com/oliveiraeliel">
-          oliveiraeliel <BsGithub />
-        </a>
-      </Footer>
     </>
   );
 }

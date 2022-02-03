@@ -56,6 +56,12 @@ export const MenuLink = styled.a`
   text-decoration: none;
   transition: all 0.3s ease-in;
   font-size: 0.9rem;
+  display: ${(props) => (props.logged ? "none" : "block")};
+`;
+
+export const Logout = styled(MenuLink)`
+  visibility: ${(props) => (props.logged ? "visible" : "hidden")};
+
 `;
 
 export const SearchField = styled.div`
