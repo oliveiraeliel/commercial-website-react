@@ -41,7 +41,7 @@ export default function Navbar() {
         {/* <MenuLink href="#"></MenuLink> */}
         <MenuLink href="#on-sale">On sale</MenuLink>
         <MenuLink href="#catalog">Catalog</MenuLink>
-        <MenuLink href="#">
+        <MenuLink href="/login">
           <Button
             text="Login"
             btnColor="--color-turquoise-blue"
@@ -51,7 +51,7 @@ export default function Navbar() {
             
           />
         </MenuLink>
-        <MenuLink href="#">
+        <MenuLink href="/sign-up">
           <Button
             text="Sign up"
             btnColor="--color-dark-purple"
