@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import { BiSearchAlt } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
+import env from "react-dotenv";
 
 import {
   Nav,
@@ -16,7 +17,8 @@ import {
 
 export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
-
+  const user = JSON.parse(localStorage.getItem("user"));
+  
   return (
     <Nav>
       <Logo>
@@ -57,8 +59,7 @@ export default function Navbar(props) {
         <MenuLink
           style={{
             display:
-              JSON.parse(localStorage.getItem("user")).email ===
-              "admin.acount@admin.com"
+              user !== null && user.email == process.env.REACT_APP_ADMIN
                 ? "block"
                 : "none",
           }}

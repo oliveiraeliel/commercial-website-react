@@ -42,7 +42,7 @@ export default function SignUp() {
         name: name,
         fullName: fullName,
         email: email,
-        password: password,
+        _password: password,
       })
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data));

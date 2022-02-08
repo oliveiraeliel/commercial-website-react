@@ -29,7 +29,17 @@ export const Img = styled.img`
 
 export const Section = styled.section`
   width: 100%;
-  height: 100vh;
-  display: grid;
-  place-content: center;
+  height: 150vh;
+  /* display: grid;
+  place-content: center; */
+`;
+
+export const NumBox = styled.div`
+  width: 30rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  input {
+    width: 9rem;
+  }
 `;

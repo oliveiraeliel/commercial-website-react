@@ -12,7 +12,7 @@ import env from "react-dotenv";
 
 import { api } from "../../Api";
 
-import { Section, Form, Img, Input } from "../AddProduct/styles";
+import { Section, Form, Img, Input, NumBox } from "../AddProduct/styles";
 import Button from "../../components/Button";
 
 export default function UpdateProduct() {
@@ -23,21 +23,20 @@ export default function UpdateProduct() {
   const [price, setPrice] = useState(null);
   const [cost, setCost] = useState(null);
   const [brand, setBrand] = useState(null);
-  const [img, setImg] = useState(null);
+  const [img, setImg] = useState("");
   const [quantity, setQuantity] = useState(null);
   const [_id, set_Id] = useState(null);
   const [onSale, setOnSale] = useState(false);
   const [onSalePrice, setOnSalePrice] = useState(null);
+  const [imgURL, setImgURL] = useState(null);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (
-      JSON.parse(localStorage.getItem("user")).email !==
-      "admin.acount@admin.com"
-    ) {
-      window.location.href = "/home";
+    if (user.email !== process.env.REACT_APP_ADMIN) {
+      window.location.href = "/";
       return;
     }
-
     api
       .get("/product")
       .then((res) => setProducts(res.data))
@@ -47,6 +46,22 @@ export default function UpdateProduct() {
   }, []);
 
   function handleClick() {
+    const image = new FormData();
+    if (img !== null) {
+      image.append("file", img);
+      image.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET);
+      axios
+        .post("https://api.cloudinary.com/v1_1/dd2cjxbui/image/upload", image)
+        .then((res) => {
+          api
+            .patch("/product/image", {
+              image: res.data.secure_url,
+              _id: _id,
+            })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+        });
+    }
     if (
       name === null ||
       price === null ||
@@ -62,13 +77,13 @@ export default function UpdateProduct() {
     api
       .patch("/product", {
         name: name,
-        price: price,
-        cost: cost,
+        price: +price,
+        cost: +cost,
         brand: brand,
         onSale: onSale,
-        onSalePrice: onSalePrice,
+        onSalePrice: +onSalePrice,
         _id: _id,
-        quantity: quantity,
+        quantity: +quantity,
       })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
@@ -77,7 +92,7 @@ export default function UpdateProduct() {
   return (
     <Section>
       <Form>
-        <Img src={img !== null ? img.preview.url : ""}></Img>
+        <Img src={img != "" ? img.preview.url : imgURL}></Img>
         <Input>
           <Files
             className="files-dropzone"
@@ -106,6 +121,7 @@ export default function UpdateProduct() {
             variant="standard"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            style={{ width: "30rem" }}
           >
             {products.map((option) => (
               <MenuItem
@@ -119,6 +135,8 @@ export default function UpdateProduct() {
                   set_Id(option._id);
                   setOnSale(option.onSale);
                   setOnSalePrice(option.onSalePrice);
+                  setImgURL(option.imageURL);
+                  setImg("");
                 }}
               >
                 {option.name}
@@ -140,30 +158,40 @@ export default function UpdateProduct() {
           />
         </Input>
         <Input>
-          <TextField
-            type="number"
-            step="any"
-            label="Price"
-            variant="standard"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </Input>
-        <Input>
-          <TextField
-            label="Cost"
-            type="number"
-            step="any"
-            variant="standard"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={cost}
-            onChange={(e) => setCost(e.target.value)}
-          />
+          <NumBox>
+            <TextField
+              type="number"
+              step="any"
+              label="Price"
+              variant="standard"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <TextField
+              label="Cost"
+              type="number"
+              step="any"
+              variant="standard"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+            />
+            <TextField
+              label="Quantity"
+              variant="standard"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </NumBox>
         </Input>
         <Input>
           <TextField
@@ -177,22 +205,11 @@ export default function UpdateProduct() {
             onChange={(e) => setBrand(e.target.value)}
           />
         </Input>
-        <Input>
-          <TextField
-            label="Quantity"
-            variant="standard"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-        </Input>
+
         <Input>
           <FormGroup>
             <FormControlLabel
-              control={onSale ? <Checkbox defaultChecked /> : <Checkbox />}
+              control={<Checkbox checked={onSale} />}
               label="On sale"
               onChange={() => setOnSale(!onSale)}
             />

@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 import Files from "react-files";
 import env from "react-dotenv";
 
 import { api } from "../../Api";
 
-import { Form, Input, Img, Section } from "./styles";
+import { Form, Input, Img, Section, NumBox } from "./styles";
 import Button from "../../components/Button";
 
 export default function AddProduct() {
@@ -17,6 +17,15 @@ export default function AddProduct() {
   const [brand, setBrand] = useState(null);
   const [img, setImg] = useState(null);
   const [quantity, setQuantity] = useState(null);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (user.email !== process.env.REACT_APP_ADMIN) {
+      window.location.href = "/";
+      return;
+    }
+  }, []);
 
   function handleClick() {
     const image = new FormData();
@@ -92,24 +101,32 @@ export default function AddProduct() {
           />
         </Input>
         <Input>
-          <TextField
-            id="standard-basic"
-            type="number"
-            step="any"
-            label="Price"
-            variant="standard"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </Input>
-        <Input>
-          <TextField
-            id="standard-basic"
-            label="Cost"
-            variant="standard"
-            value={cost}
-            onChange={(e) => setCost(e.target.value)}
-          />
+          <NumBox>
+            <TextField
+              id="standard-basic"
+              type="number"
+              step="any"
+              label="Price"
+              variant="standard"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <TextField
+              id="standard-basic"
+              label="Cost"
+              variant="standard"
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+            />
+            <TextField
+              id="standard-basic"
+              label="Quantity"
+              variant="standard"
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </NumBox>
         </Input>
         <Input>
           <TextField
@@ -119,16 +136,6 @@ export default function AddProduct() {
             type="text"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
-          />
-        </Input>
-        <Input>
-          <TextField
-            id="standard-basic"
-            label="Quantity"
-            variant="standard"
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
           />
         </Input>
         <Input>

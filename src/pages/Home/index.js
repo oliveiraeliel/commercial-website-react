@@ -18,10 +18,15 @@ import {
 
 export default function Home() {
   const user = JSON.parse(localStorage.getItem("user"));
+  const [products, setProducts] = useState([]);
   const [logged, setLogged] = useState(false);
+  const [showOnSale, setShowOnSale] = useState(false);
 
   useEffect(() => {
-    if (user) setLogged(true);
+    if (!user) {
+      return;
+    }
+    setLogged(true);
   }, []);
 
   document.title = "Ji.shirts";
@@ -29,9 +34,13 @@ export default function Home() {
     api
       .get("/product")
       .then((res) => {
+        setProducts(res.data);
         console.log(res.data);
+        res.data.map((row) => {
+          if (row.onSale) setShowOnSale(true);
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("err"));
   }, []);
 
   const breakPoints = [
@@ -57,90 +66,46 @@ export default function Home() {
         </Container>
       </Section>
       <Section
-        style={{ backgroundColor: "var(--color-dark-purple)" }}
+        style={{
+          backgroundColor: "var(--color-dark-purple)",
+          display: showOnSale ? "block" : "none",
+        }}
         id="on-sale"
       >
         <h1>On Sale</h1>
 
         <Carousel itemsToShow={1} breakPoints={breakPoints}>
-          <Item>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              _onSale={true}
-              newPrice="R$ 80"
-            />
-          </Item>
-          <Item>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              _onSale={true}
-              newPrice="R$ 80"
-            />
-          </Item>
-          <Item>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              _onSale={true}
-              newPrice="R$ 80"
-            />
-          </Item>
-          <Item>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              _onSale={true}
-              newPrice="R$ 80"
-            />
-          </Item>
-          <Item>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-              _onSale={true}
-              newPrice="R$ 80"
-            />
-          </Item>
+          {products.map((row) => {
+            if (!row.onSale) {
+              return;
+            }
+            return (
+            <Item>
+              <Box
+                name={row.name}
+                price={row.price}
+                _onSale={true}
+                newPrice={`R$ ${row.onSalePrice}`}
+                url={row.imageURL}
+              />
+            </Item>
+            );
+          })}
         </Carousel>
       </Section>
       <CatalogBody id="catalog">
         <h1>Catalog</h1>
         <Catalog>
-          <CatalogItem>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-            />
-          </CatalogItem>
-          <CatalogItem>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-            />
-          </CatalogItem>
-          <CatalogItem>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-            />
-          </CatalogItem>
-          <CatalogItem>
-            <Box
-              name="Black T-shirt"
-              price="120"
-              url="https://www.pngplay.com/wp-content/uploads/12/Crew-Neck-T-Shirt-Download-Free-PNG.png  "
-            />
-          </CatalogItem>
+          {products.map((row) => {
+            if (row.onSale) {
+              return;
+            }
+            return (
+              <CatalogItem>
+                <Box name={row.name} price={row.price} url={row.imageURL} />
+              </CatalogItem>
+            );
+          })}
         </Catalog>
       </CatalogBody>
     </>

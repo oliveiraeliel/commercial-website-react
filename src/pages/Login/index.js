@@ -27,7 +27,7 @@ export default function Login() {
     api
       .post("/user/login", {
         email: email,
-        password: password,
+        _password: password,
       })
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data));
