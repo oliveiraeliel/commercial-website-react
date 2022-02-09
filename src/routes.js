@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Admin from "./pages/Admin";
 import UpdateProduct from "./pages/UpdateProduct";
+import Product from "./pages/Product";
 
 export default function Routes_() {
   return (
@@ -19,6 +20,7 @@ export default function Routes_() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/update-product" element={<UpdateProduct />} />
+        <Route path="/:id" element={<Product />} />
       </Routes>
     </BrowserRouter>
   );

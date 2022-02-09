@@ -1,0 +1,110 @@
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { api } from "../../Api";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import Button from "../../components/Button/index";
+
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
+import { SaleBoxBody, Img, Info, ImgBox, OnSalePrice, Price } from "./styles";
+
+export default function Product() {
+  const [product, setProduct] = useState([]);
+  const [price, setPrice] = useState(null);
+
+  // const [quantityArray, setQuantityArray] = useState([]);
+  // const [quantity, setQuantity] = useState(null);
+
+  const search = useLocation().search;
+  const id = new URLSearchParams(search).get("id");
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  function handleClickBuy() {
+    if (user._id === undefined) {
+      alert("You have to login to do this!");
+      window.location.href = "/login";
+      return;
+    }
+    let a = window.confirm(`Are you sure about this?`);
+
+    if (!a) {
+      return;
+    }
+
+    api
+      .post("/operation", {
+        product: product._id,
+        buyer: user._id,
+        unityCost: +product.cost,
+        quantity: 1,
+        unityPrice: price,
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    api
+      .get(`/product/${id}`)
+      .then((res) => {
+        setProduct(res.data);
+        // let a = [];
+        // for (let i = 1; i <= res.data.quantity; i++) {
+        //   a.push(i);
+        // }
+        // setQuantityArray(a);
+        if (res.data.onSale) {
+          setPrice(res.data.onSalePrice);
+          return;
+        }
+        setPrice(res.data.price);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <SaleBoxBody>
+      <ImgBox>
+        <Img src={product.imageURL}></Img>
+      </ImgBox>
+      <Info>
+        <h1>{capitalizeFirstLetter(product.name)}</h1>
+        <Price _onSale={product.onSale}>R$ {product.price}</Price>
+        <OnSalePrice style={{ display: product.onSale ? "block" : "none" }}>
+          R$ {product.onSalePrice}
+        </OnSalePrice>
+        {/* <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={quantity}
+              label="Quantity"
+              onChange={(e) => setQuantity(e)}
+            >
+              {quantityArray.map((row) => {
+                <MenuItem value={row}>{row}</MenuItem>;
+              })}
+
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+        </Box> */}
+        <Button
+          btnWidth="20rem"
+          btnHeight="40px"
+          text="Buy"
+          txtColor="--color-white"
+          btnColor="--color-dark-purple"
+          onClick={handleClickBuy}
+          txtSize="1.5rem"
+        />
+      </Info>
+    </SaleBoxBody>
+  );
+}

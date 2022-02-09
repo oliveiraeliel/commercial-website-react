@@ -15,6 +15,7 @@ import {
   CatalogBody,
   CatalogItem,
 } from "./styles";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
 export default function Home() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -48,9 +49,7 @@ export default function Home() {
     { width: 840, itemsToShow: 2, itemsToScroll: 2, pagination: false },
     { width: 1230, itemsToShow: 3 },
   ];
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+
   return (
     <>
       <Section>
@@ -80,15 +79,16 @@ export default function Home() {
               return;
             }
             return (
-            <Item>
-              <Box
-                name={row.name}
-                price={row.price}
-                _onSale={true}
-                newPrice={`R$ ${row.onSalePrice}`}
-                url={row.imageURL}
-              />
-            </Item>
+              <Item>
+                <Box
+                  name={capitalizeFirstLetter(row.name)}
+                  price={row.price}
+                  _onSale={true}
+                  newPrice={`R$ ${row.onSalePrice}`}
+                  url={row.imageURL}
+                  _id={row._id}
+                />
+              </Item>
             );
           })}
         </Carousel>
@@ -102,7 +102,12 @@ export default function Home() {
             }
             return (
               <CatalogItem>
-                <Box name={row.name} price={row.price} url={row.imageURL} />
+                <Box
+                  name={capitalizeFirstLetter(row.name)}
+                  price={row.price}
+                  url={row.imageURL}
+                  _id={row._id}
+                />
               </CatalogItem>
             );
           })}
