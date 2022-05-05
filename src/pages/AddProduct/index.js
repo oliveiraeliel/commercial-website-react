@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 import Files from "react-files";
-import env from "react-dotenv";
-
 import { api } from "../../Api";
 
 import { Form, Input, Img, Section, NumBox } from "./styles";

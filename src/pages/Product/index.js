@@ -4,20 +4,11 @@ import { api } from "../../Api";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import Button from "../../components/Button/index";
 
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-
 import { SaleBoxBody, Img, Info, ImgBox, OnSalePrice, Price } from "./styles";
 
 export default function Product() {
   const [product, setProduct] = useState([]);
   const [price, setPrice] = useState(null);
-
-  // const [quantityArray, setQuantityArray] = useState([]);
-  // const [quantity, setQuantity] = useState(null);
 
   const search = useLocation().search;
   const id = new URLSearchParams(search).get("id");

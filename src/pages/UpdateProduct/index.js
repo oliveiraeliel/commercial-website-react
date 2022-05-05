@@ -8,7 +8,6 @@ import {
   FormGroup,
 } from "@mui/material";
 import Files from "react-files";
-import env from "react-dotenv";
 
 import { api } from "../../Api";
 
