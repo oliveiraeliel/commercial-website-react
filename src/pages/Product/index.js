@@ -52,11 +52,6 @@ export default function Product() {
       .get(`/product/${id}`)
       .then((res) => {
         setProduct(res.data);
-        // let a = [];
-        // for (let i = 1; i <= res.data.quantity; i++) {
-        //   a.push(i);
-        // }
-        // setQuantityArray(a);
         if (res.data.onSale) {
           setPrice(res.data.onSalePrice);
           return;
@@ -73,28 +68,10 @@ export default function Product() {
       </ImgBox>
       <Info>
         <h1>{capitalizeFirstLetter(product.name)}</h1>
-        <Price _onSale={product.onSale}>R$ {product.price}</Price>
+        <Price onSale={product.onSale}>R$ {product.price}</Price>
         <OnSalePrice style={{ display: product.onSale ? "block" : "none" }}>
           R$ {product.onSalePrice}
         </OnSalePrice>
-        {/* <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={quantity}
-              label="Quantity"
-              onChange={(e) => setQuantity(e)}
-            >
-              {quantityArray.map((row) => {
-                <MenuItem value={row}>{row}</MenuItem>;
-              })}
-
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Box> */}
         <Button
           btnWidth="20rem"
           btnHeight="40px"

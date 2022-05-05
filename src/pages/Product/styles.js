@@ -33,9 +33,9 @@ export const Info = styled.a`
 `;
 
 export const Price = styled.a`
-  font-size: ${(props) => (props._onSale ? "1.5rem" : "2.5rem")};
-  font-weight: ${(props) => (props._onSale ? "300" : "500")};
-  text-decoration: ${(props) => (props._onSale ? "line-through" : "none")};
+  font-size: ${(props) => (props.onSale ? "1.5rem" : "2.5rem")};
+  font-weight: ${(props) => (props.onSale ? "300" : "500")};
+  text-decoration: ${(props) => (props.onSale ? "line-through" : "none")};
 `;
 
 export const OnSalePrice = styled.a`

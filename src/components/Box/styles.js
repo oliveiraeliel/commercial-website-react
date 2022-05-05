@@ -7,9 +7,7 @@ export const BoxBody = styled.a`
   grid-auto-flow: row dense;
   grid-gap: 1rem;
   width: 20rem;
-
   height: 500px;
-  /* border-radius: 14px; */
   border: 2px solid var(--color-tyrian-purple);
   padding: 1rem 1rem 3rem;
   text-decoration: none;
@@ -36,13 +34,12 @@ export const Price = styled.a`
   text-decoration: ${(props) => (props._onSale ? "line-through" : "none")};
 `;
 
-export const NewPrice = styled.a`
+export const OnSalePrice = styled.a`
   font-size: 2.5rem;
   font-weight: 600;
 `;
 
 export const ProductImg = styled.img`
-  /* width: 100%; */
   min-height: 340px;
   max-width: 300px;
 

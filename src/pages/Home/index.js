@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "../../components/Box";
-import Navbar from "../../containers/Navbar";
+import Navbar from "../../components/Navbar";
 import Carousel from "react-elastic-carousel";
 import { api } from "../../Api";
 
@@ -36,14 +36,13 @@ export default function Home() {
       .get("/product")
       .then((res) => {
         setProducts(res.data);
-        console.log(res.data);
+        localStorage.setItem("products", JSON.stringify(res.data));
         res.data.map((row) => {
           if (row.onSale) setShowOnSale(true);
         });
       })
       .catch((err) => console.log("err"));
   }, []);
-
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 840, itemsToShow: 2, itemsToScroll: 2, pagination: false },
@@ -84,7 +83,7 @@ export default function Home() {
                   name={capitalizeFirstLetter(row.name)}
                   price={row.price}
                   _onSale={true}
-                  newPrice={`R$ ${row.onSalePrice}`}
+                  _onSalePrice={`R$ ${row.onSalePrice}`}
                   url={row.imageURL}
                   _id={row._id}
                 />

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import { BiSearchAlt } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
-import env from "react-dotenv";
+
+import { similarity } from "../../utils/similarity";
 
 import {
   Nav,
@@ -12,30 +13,60 @@ import {
   MenuLink,
   SearchField,
   Search,
-  Logout,
 } from "./styles";
+
+import SuggestionBar from "../SuggestionBar";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+
+const products = JSON.parse(localStorage.getItem("products"));
 
 export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState();
   const user = JSON.parse(localStorage.getItem("user"));
-  
+
   return (
     <Nav>
       <Logo>
         <a>Ji.shirts</a>
       </Logo>
-      <SearchField>
-        <Search placeholder="Search for some product..."></Search>
-        <BiSearchAlt
-          style={{
-            borderRadius: "0 14px 14px 0",
-            border: "1px solid var(--color-lapis-lazuli)",
-            padding: "0.3rem",
-            backgroundColor: "var(--color-lapis-lazuli)",
-            color: "var(--color-white)",
-          }}
-        />
-      </SearchField>
+      <div>
+        <SearchField>
+          <Search
+            placeholder="Search for some product..."
+            onChange={(e) => {
+              setSearch(
+                similarity(e.target.value, products, ["brand", "name"])
+              );
+            }}
+          ></Search>
+          <BiSearchAlt
+            style={{
+              borderRadius: "0 14px 14px 0",
+              border: "1px solid var(--color-lapis-lazuli)",
+              padding: "0.3rem",
+              backgroundColor: "var(--color-lapis-lazuli)",
+              color: "var(--color-white)",
+            }}
+          />
+        </SearchField>
+        <div style={{ position: "absolute" }}>
+          {search
+            ? search.map((item) => {
+                return (
+                  <SuggestionBar
+                    name={capitalizeFirstLetter(item.name)}
+                    price={item.price}
+                    _onSale={item.onSale}
+                    _onSalePrice={item.onSalePrice}
+                    img={item.imageURL}
+                    _id={item._id}
+                  />
+                );
+              })
+            : ""}
+        </div>
+      </div>
       <Hamburger onClick={() => setIsOpen(!isOpen)}>
         <span />
         <span />
