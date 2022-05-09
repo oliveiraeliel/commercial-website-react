@@ -12,7 +12,7 @@ import Files from "react-files";
 import { api } from "../../Api";
 
 import { Section, Form, Img, Input, NumBox } from "../AddProduct/styles";
-import Button from "../../components/Button";
+import { Button } from "../../components";
 
 export default function UpdateProduct() {
   document.title = "Upload product";

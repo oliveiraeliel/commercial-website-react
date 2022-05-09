@@ -8,7 +8,7 @@ export const BoxBody = styled.a`
   grid-gap: 1rem;
   width: 20rem;
   height: 500px;
-  border: 2px solid var(--color-tyrian-purple);
+  border: 0.1px solid var(--color-tyrian-purple);
   padding: 1rem 1rem 3rem;
   text-decoration: none;
   color: black;

@@ -13,7 +13,7 @@ import { api } from "../../Api";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { Form, FormItem, Section, Erro } from "./styles";
-import Button from "../../components/Button";
+import { Button } from "../../components";
 
 export default function SignUp() {
   document.title = "Sign up";

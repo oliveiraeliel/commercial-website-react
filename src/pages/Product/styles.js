@@ -32,6 +32,13 @@ export const Info = styled.a`
   text-align: center;
 `;
 
+export const InfoBox = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Price = styled.a`
   font-size: ${(props) => (props.onSale ? "1.5rem" : "2.5rem")};
   font-weight: ${(props) => (props.onSale ? "300" : "500")};
@@ -42,5 +49,3 @@ export const OnSalePrice = styled.a`
   font-size: 3rem;
   font-weight: 500;
 `;
-
-

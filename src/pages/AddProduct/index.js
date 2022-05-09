@@ -5,7 +5,8 @@ import Files from "react-files";
 import { api } from "../../Api";
 
 import { Form, Input, Img, Section, NumBox } from "./styles";
-import Button from "../../components/Button";
+
+import { Button  } from "../../components";
 
 export default function AddProduct() {
   document.title = "Add product";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Box from "../../components/Box";
-import Navbar from "../../components/Navbar";
 import Carousel from "react-elastic-carousel";
 import { api } from "../../Api";
+
+import { ContactUs, Box, Navbar,  } from "../../components";
 
 import {
   Welcome,
@@ -112,6 +112,7 @@ export default function Home() {
           })}
         </Catalog>
       </CatalogBody>
+      <ContactUs />
     </>
   );
 }

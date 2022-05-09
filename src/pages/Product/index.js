@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../Api";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-import Button from "../../components/Button/index";
+import { Button } from "../../components";
 
-import { SaleBoxBody, Img, Info, ImgBox, OnSalePrice, Price } from "./styles";
+import {
+  SaleBoxBody,
+  InfoBox,
+  Img,
+  Info,
+  ImgBox,
+  OnSalePrice,
+  Price,
+} from "./styles";
 
 export default function Product() {
   const [product, setProduct] = useState([]);
@@ -57,22 +65,24 @@ export default function Product() {
       <ImgBox>
         <Img src={product.imageURL}></Img>
       </ImgBox>
-      <Info>
-        <h1>{capitalizeFirstLetter(product.name)}</h1>
-        <Price onSale={product.onSale}>R$ {product.price}</Price>
-        <OnSalePrice style={{ display: product.onSale ? "block" : "none" }}>
-          R$ {product.onSalePrice}
-        </OnSalePrice>
-        <Button
-          btnWidth="20rem"
-          btnHeight="40px"
-          text="Buy"
-          txtColor="--color-white"
-          btnColor="--color-dark-purple"
-          onClick={handleClickBuy}
-          txtSize="1.5rem"
-        />
-      </Info>
+      <InfoBox>
+        <Info>
+          <h1>{capitalizeFirstLetter(product.name)}</h1>
+          <Price onSale={product.onSale}>R$ {product.price}</Price>
+          <OnSalePrice style={{ display: product.onSale ? "block" : "none" }}>
+            R$ {product.onSalePrice}
+          </OnSalePrice>
+          <Button
+            btnWidth="20rem"
+            btnHeight="40px"
+            text="Buy"
+            txtColor="--color-white"
+            btnColor="--color-dark-purple"
+            onClick={handleClickBuy}
+            txtSize="1.5rem"
+          />
+        </Info>
+      </InfoBox>
     </SaleBoxBody>
   );
 }
