@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Body = styled.section`
-  height: 50vh;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  background-color: pink;
+  margin: 0;
+  border: 0;
+  padding: 0;
   h1 {
     margin: 0;
   }
@@ -16,10 +20,22 @@ export const Body = styled.section`
   @media (max-width: 750px) {
     flex-direction: column;
   }
-  margin: 1rem;
+`;
+
+export const Infos = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Title = styled.a`
+  /* flex: 1; */
 `;
 
 export const EmailBox = styled.div`
+  flex: 1;
   width: 60vw;
   height: 40vh;
   background-color: pink;

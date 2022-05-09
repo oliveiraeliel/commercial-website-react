@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-elastic-carousel";
 import { api } from "../../Api";
 
-import { ContactUs, Box, Navbar,  } from "../../components";
+import { ContactUs, Box, Navbar, PopUp } from "../../components";
 
 import {
   Welcome,
@@ -112,7 +112,6 @@ export default function Home() {
           })}
         </Catalog>
       </CatalogBody>
-      <ContactUs />
     </>
   );
 }
